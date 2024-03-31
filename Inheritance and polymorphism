@@ -1,0 +1,31 @@
+class Animal {
+  public void makeSound() {
+    System.out.println("Generic animal sound");
+  }
+}
+
+class Dog extends Animal {
+  @Override
+  public void makeSound() {
+    System.out.println("Woof!");
+  }
+}
+
+class Cat extends Animal {
+  @Override
+  public void makeSound() {
+    System.out.println("Meow!");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Animal animal = new Animal();
+    Dog dog = new Dog();
+    Cat cat = new Cat();
+
+    animal.makeSound(); // Output: Generic animal sound
+    dog.makeSound();    // Output: Woof!
+    cat.makeSound();    // Output: Meow!
+  }
+}
