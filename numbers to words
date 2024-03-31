@@ -1,0 +1,53 @@
+public class NumberToWords {
+
+    private static final String[] units = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+    private static final String[] teens = {"", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+    private static final String[] tens = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+    private static final String[] bigs = {"", "thousand", "million", "billion"};
+
+    public static String inWords(int num) {
+        if (num == 0) {
+            return "zero";
+        } else if (num < 0) {
+            return "minus " + inWords(-num);
+        }
+
+        String words = "";
+        int partCount = 0;
+
+        while (num > 0) {
+            if (num % 1000 != 0) {
+                words = convertToWords(num % 1000) + " " + bigs[partCount] + " " + words;
+            }
+            num /= 1000;
+            partCount++;
+        }
+
+        return words.trim();
+    }
+
+    private static String convertToWords(int num) {
+        if (num == 0) {
+            return "";
+        } else if (num < 10) {
+            return units[num];
+        } else if (num < 20) {
+            return teens[num - 10];
+        } else if (num < 100) {
+            return tens[num / 10] + ((num % 10 != 0) ? " " + convertToWords(num % 10) : "");
+        } else {
+            return units[num / 100] + " hundred" + ((num % 100 != 0) ? " " + convertToWords(num % 100) : "");
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        int num1 = 12345;
+        int num2 = 10203040;
+        int num3 = 101;
+
+        System.out.println(num1 + " in words: " + inWords(num1));
+        System.out.println(num2 + " in words: " + inWords(num2));
+        System.out.println(num3 + " in words: " + inWords(num3));
+    }
+}
