@@ -1,0 +1,55 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class GradeStatisticsCalculator {
+    public static void main(String[] args) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("grades.csv"))) {
+            List<String[]> lines = reader.lines()
+                    .map(line -> line.split(","))
+                    .collect(Collectors.toList());
+
+            if (lines.isEmpty()) {
+                System.out.println("No data found in the file.");
+                return;
+            }
+
+            double sum = 0;
+            int highestGrade = Integer.MIN_VALUE;
+            int lowestGrade = Integer.MAX_VALUE;
+            int passedCount = 0;
+            int failedCount = 0;
+
+            for (String[] line : lines) {
+                int grade = Integer.parseInt(line[1].trim());
+                sum += grade;
+                if (grade > highestGrade) {
+                    highestGrade = grade;
+                }
+                if (grade < lowestGrade) {
+                    lowestGrade = grade;
+                }
+                if (grade >= 60) {
+                    passedCount++;
+                } else {
+                    failedCount++;
+                }
+            }
+
+            double average = sum / lines.size();
+            System.out.println("Statistics:");
+            System.out.println("- Average grade: " + average);
+            System.out.println("- Highest grade: " + highestGrade);
+            System.out.println("- Lowest grade: " + lowestGrade);
+            System.out.println("- Number of students passed: " + passedCount);
+            System.out.println("- Number of students failed: " + failedCount);
+
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid grade format in the file.");
+        }
+    }
+}
