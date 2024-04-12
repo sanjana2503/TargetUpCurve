@@ -1,0 +1,46 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import java.util.List;
+
+public class AnagramGroupsTest {
+
+    public void testGroupAnagrams() {
+        String[] input1 = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        List<List<String>> expected1 = Arrays.asList(Arrays.asList("eat", "tea", "ate"), Arrays.asList("tan", "nat"), Arrays.asList("bat"));
+        assertEquals(expected1, AnagramGroups.groupAnagrams(input1));
+
+        String[] input2 = {"star", "rats", "arts", "cars", "scar"};
+        List<List<String>> expected2 = Arrays.asList(Arrays.asList("star", "rats", "arts"), Arrays.asList("cars", "scar"));
+        assertEquals(expected2, AnagramGroups.groupAnagrams(input2));
+    }
+
+    public void testNoAnagrams() {
+        String[] input = {"abc", "def", "ghi"};
+        List<List<String>> expected = Arrays.asList(Arrays.asList("abc"), Arrays.asList("def"), Arrays.asList("ghi"));
+        assertEquals(expected, AnagramGroups.groupAnagrams(input));
+    }
+
+    public void testEmptyArray() {
+        String[] input = {};
+        List<List<String>> expected = new ArrayList<>();
+        assertEquals(expected, AnagramGroups.groupAnagrams(input));
+    }
+
+    public void testDifferentLengths() {
+        String[] input = {"eat", "tea", "tan", "ate", "nat", "bat", "gym"};
+        List<List<String>> expected = Arrays.asList(Arrays.asList("eat", "tea", "ate"), Arrays.asList("tan", "nat"), Arrays.asList("bat"), Arrays.asList("gym"));
+        assertEquals(expected, AnagramGroups.groupAnagrams(input));
+    }
+
+    public void testSpecialCharacters() {
+        String[] input = {"$#test", "est$t#", "#test", "t$#set"};
+        List<List<String>> expected = Arrays.asList(Arrays.asList("$#test", "#test"), Arrays.asList("est$t#", "t$#set"));
+        assertEquals(expected, AnagramGroups.groupAnagrams(input));
+    }
+
+    public void testMixedCase() {
+        String[] input = {"Tea", "EaT", "tEa", "tan", "Eat", "bat"};
+        List<List<String>> expected = Arrays.asList(Arrays.asList("Tea", "EaT", "tEa"), Arrays.asList("tan"), Arrays.asList("bat"));
+        assertEquals(expected, AnagramGroups.groupAnagrams(input));
+    }
+}
