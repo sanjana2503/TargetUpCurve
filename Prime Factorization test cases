@@ -1,0 +1,33 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import java.util.List;
+
+public class PrimeFactorizationTest {
+
+    public void testPrimeFactors() {
+        assertEquals(Arrays.asList(2, 3, 5), PrimeFactorization.primeFactors(30));
+        assertEquals(Arrays.asList(2, 7), PrimeFactorization.primeFactors(56));
+    }
+
+    public void testPrimeNumber() {
+        assertEquals(Arrays.asList(17), PrimeFactorization.primeFactors(17));
+    }
+
+    public void testCompositeNumber() {
+        assertEquals(Arrays.asList(2, 2, 3), PrimeFactorization.primeFactors(12));
+    }
+
+    public void testSinglePrimeFactor() {
+        assertEquals(Arrays.asList(13), PrimeFactorization.primeFactors(13));
+    }
+
+    public void testNegativeNumber() {
+        assertEquals(Arrays.asList(-1, 2, 2, 3), PrimeFactorization.primeFactors(-12));
+    }
+
+    public void testZeroAndOne() {
+        assertEquals(Arrays.asList(), PrimeFactorization.primeFactors(0));
+        assertEquals(Arrays.asList(), PrimeFactorization.primeFactors(1));
+    }
+}
