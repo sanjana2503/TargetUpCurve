@@ -1,0 +1,48 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+public class WordReversal {
+    public static String reverseWords(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        String[] words = input.split("\\s+");
+        StringBuilder reversed = new StringBuilder();
+        for (int i = words.length - 1; i >= 0; i--) {
+            reversed.append(words[i]);
+            if (i > 0) {
+                reversed.append(" ");
+            }
+        }
+        return reversed.toString();
+    }
+
+
+    public void testSingleWordInput() {
+        assertEquals("Hello", reverseWords("Hello"));
+    }
+
+    public void testMultipleWordsInput() {
+        assertEquals("World Hello", reverseWords("Hello World"));
+    }
+
+
+    public void testLeadingAndTrailingSpaces() {
+        assertEquals("World Hello", reverseWords("   Hello World   "));
+    }
+
+  
+    public void testExtraSpacesBetweenWords() {
+        assertEquals("World Hello", reverseWords("Hello   World"));
+    }
+
+  
+    public void testEmptyStringInput() {
+        assertEquals("", reverseWords(""));
+    }
+
+    public void testSpecialCharactersAndPunctuation() {
+        assertEquals("Test? is This!", reverseWords("This! is Test?"));
+    }
+}
