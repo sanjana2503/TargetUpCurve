@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class UserInputHandler {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> integerInputs = new ArrayList<>();
+        List<String> nonIntegerInputs = new ArrayList<>();
+        
+        int totalInputs = 0;
+        int sumOfIntegers = 0;
+
+        while (true) {
+            System.out.print("Please enter a number (or type 'NO' to stop): ");
+            String input = scanner.nextLine();
+            totalInputs++;
+            
+            if (input.equalsIgnoreCase("NO")) {
+                break;
+            }
+            
+            try {
+                int integerInput = Integer.parseInt(input);
+                integerInputs.add(integerInput);
+                sumOfIntegers += integerInput;
+            } catch (NumberFormatException e) {
+                nonIntegerInputs.add(input);
+            }
+            
+            System.out.print("Do you want to continue (yes/no)? ");
+            String continueInput = scanner.nextLine();
+            if (continueInput.equalsIgnoreCase("no")) {
+                break;
+            }
+        }
+
+        int numberOfIntegerInputs = integerInputs.size();
+        int numberOfNonIntegerInputs = nonIntegerInputs.size();
+
+        System.out.println("Number of inputs = " + totalInputs);
+        System.out.println("Number of integer inputs = " + numberOfIntegerInputs);
+        System.out.println("Number of non-integer inputs = " + numberOfNonIntegerInputs);
+        System.out.println("Sum of all integer inputs = " + sumOfIntegers);
+        System.out.println("The integer inputs = " + integerInputs);
+        System.out.println("The non-integer inputs = " + nonIntegerInputs);
+
+        scanner.close();
+    }
+}
